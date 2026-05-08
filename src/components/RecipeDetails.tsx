@@ -6,60 +6,64 @@ type Props = {
     darkMode: boolean
 }
 
-function RecipeDetails({ selectedRecipe, darkMode,}: Props)
-{
+function RecipeDetails({ selectedRecipe, darkMode }: Props) {
     return (
         <AnimatePresence mode="wait">
-            {selectedRecipe &&
-                (
-                    <motion.div
-                            key={selectedRecipe.title}
-                            initial={{ opacity: 0, x: 40 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -40 }}
-                            className={`p-8 rounded-3xl ${darkMode ? "bg-zinc-900" : "bg-white"}`}>
+            {selectedRecipe && (
+                <motion.div
+                    key={selectedRecipe.title}
+                    initial={{ opacity: 0, x: 40 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -40 }}
+                    className={`p-6 rounded-2xl ${
+                        darkMode ? "bg-zinc-900 text-white" : "bg-white"
+                    }`}
+                >
+                    <h2 className="text-3xl font-bold mb-6">
+                        {selectedRecipe.title}
+                    </h2>
 
-                        <h2 className="text-4xl font-bold mb-8">
-                            {selectedRecipe.title}
-                        </h2>
+                    {/* Ingredients */}
+                    <div className="mb-6">
+                        <h3 className="text-xl font-semibold mb-3">
+                            Ingredients
+                        </h3>
 
-                        <div className="mb-8">
-                            <h3 className="text-2xl font-semibold mb-4">
-                                Ingredients
-                            </h3>
+                        <ul className="space-y-1">
+                            {selectedRecipe.ingredients.map((item, i) => (
+                                <li key={i} className="text-zinc-400">
+                                    • {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
 
-                            <ul className="space-y-2">
-                                {selectedRecipe.ingredients.map((item, i) => (
-                                    <li key={i} className="text-zinc-400">
-                                        • {item}
-                                    </li>
-                                ))}
-                            </ul>
+                    {/* Steps */}
+                    <div>
+                        <h3 className="text-xl font-semibold mb-3">
+                            Steps
+                        </h3>
 
+                        <div className="space-y-2">
+                            {selectedRecipe.steps.map((step, i) => (
+                                <div
+                                    key={i}
+                                    className={`p-3 rounded-xl ${
+                                        darkMode
+                                            ? "bg-black"
+                                            : "bg-zinc-100"
+                                    }`}
+                                >
+                                    <span className="font-bold">
+                                        Step {i + 1}:
+                                    </span>{" "}
+                                    {step}
+                                </div>
+                            ))}
                         </div>
-
-                        <div>
-
-                            <h3 className="text-2xl font-semibold mb-4">
-                                Steps
-                            </h3>
-
-                            <div className="space-y-4">
-                                {selectedRecipe.steps.map((step, i) => (
-                                    <div key={i} className={`p-4 rounded-2xl ${darkMode ? "bg-black" : "bg-zinc-100"}`}>
-                                            <span className="font-bold">
-                                                Step {i + 1}:
-                                            </span>{" "}
-                                        {step}
-                                    </div>
-                                ))}
-                            </div>
-
-                        </div>
-
-                    </motion.div>
-                )
-            }
+                    </div>
+                </motion.div>
+            )}
         </AnimatePresence>
     )
 }
