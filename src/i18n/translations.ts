@@ -29,7 +29,7 @@ export const translations: Record<string, Translation> = {
 
         ingredients: "Ingredients",
 
-        instructions: "Instructions",
+        instructions: "Сooking",
 
         step: "Step",
 
@@ -53,7 +53,7 @@ export const translations: Record<string, Translation> = {
 
         ingredients: "Інгредієнти",
 
-        instructions: "Інструкції",
+        instructions: "Приготування",
 
         step: "Крок",
 
@@ -77,7 +77,7 @@ export const translations: Record<string, Translation> = {
 
         ingredients: "Ingredience",
 
-        instructions: "Postup",
+        instructions: "Příprava",
 
         step: "Krok",
 

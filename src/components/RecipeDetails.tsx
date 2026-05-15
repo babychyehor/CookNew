@@ -87,7 +87,7 @@ function RecipeDetails({
                                                 }
                                         >
                                             <span className="font-bold">
-                                                {t.instructions} {i + 1}:
+                                                {t.step} {i + 1}:
                                             </span>{" "}
 
                                             {step}

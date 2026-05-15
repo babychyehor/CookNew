@@ -5,19 +5,14 @@ type Props = {
     setLanguage: (lang: Language) => void
 }
 
-function LanguageSwitcher({
-                              language,
-                              setLanguage,
-                          }: Props)
+function LanguageSwitcher({language, setLanguage,}: Props)
 {
     return (
         <div className="relative inline-block">
             <select
                 value={language}
                 onChange={(e) =>
-                    setLanguage(
-                        e.target.value as Language
-                    )
+                    setLanguage(e.target.value as Language)
                 }
 
                 className="
