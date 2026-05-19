@@ -40,9 +40,9 @@ function LanguageSwitcher({language, setLanguage,}: Props)
                     focus:outline-none
                 "
             >
-                <option value="en">English</option>
-                <option value="ua">Українська</option>
-                <option value="cz">Čeština</option>
+                <option value="en"> English</option>
+                <option value="ua"> Українська</option>
+                <option value="cz"> Čeština</option>
             </select>
 
             {/* arrow */}

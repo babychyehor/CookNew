@@ -10,6 +10,13 @@ export type Translation = {
     instructions: string
     step: string
     sideBarHead: string
+    nutrition: string
+    calories: string
+    protein: string
+    fat: string
+    carbs: string
+    fiber: string
+    salt: string
 }
 
 export const translations: Record<string, Translation> = {
@@ -34,6 +41,20 @@ export const translations: Record<string, Translation> = {
         step: "Step",
 
         sideBarHead: "AI Cook",
+
+        nutrition: "Nutrition",
+
+        calories: "Total calories",
+
+        protein: "Protein",
+
+        fat: "Fat",
+
+        carbs: "Carbs",
+
+        fiber: "Fiber",
+
+        salt: "Salt",
     },
 
     ua: {
@@ -58,6 +79,20 @@ export const translations: Record<string, Translation> = {
         step: "Крок",
 
         sideBarHead: "ШІ Кухар",
+
+        nutrition: "Харчова цінність",
+
+        calories: "Загально калорій",
+
+        protein: "Білки",
+
+        fat: "Жири",
+
+        carbs: "Вуглеводи",
+
+        fiber: "Клітковина",
+
+        salt: "Сіль",
     },
 
     cz: {
@@ -82,6 +117,20 @@ export const translations: Record<string, Translation> = {
         step: "Krok",
 
         sideBarHead: "UI Kuchař",
+
+        nutrition: "Nutriční hodnoty",
+
+        calories: "Celkový počet kalorií",
+
+        protein: "Bílkoviny",
+
+        fat: "Tuky",
+
+        carbs: "Sacharidy",
+
+        fiber: "Vláknina",
+
+        salt: "Sůl",
     },
 }
 
