@@ -19,13 +19,13 @@ function Sidebar({
     return (
         <aside
             className={`
-                w-60 border-r p-5 flex flex-col
-                ${
+        w-60 h-screen shrink-0 border-r p-5 flex flex-col
+        ${
                 darkMode
                     ? "border-zinc-800 bg-zinc-950"
                     : "border-zinc-300 bg-white"
             }
-            `}
+    `}
         >
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">

@@ -38,30 +38,28 @@ function SearchBar({
                     }
                 }}
 
-                className=
-                    {
-                        `w-full px-6 py-5 rounded-2xl border text-lg outline-none transition
-                    ${
-                            darkMode
-                                ? "bg-zinc-900 border-zinc-800 focus:border-zinc-600"
-                                : "bg-white border-zinc-300 focus:border-zinc-500"
-                        }`
-                    }
+                className={
+                    `w-full px-4 py-4 md:px-6 md:py-5 rounded-2xl border text-base md:text-lg outline-none transition
+    ${
+                        darkMode
+                            ? "bg-zinc-900 border-zinc-800 focus:border-zinc-600"
+                            : "bg-white border-zinc-300 focus:border-zinc-500"
+                    }`
+                }
             />
 
             <button
                 onClick={handleSearch}
                 disabled={loading}
 
-                className=
-                    {
-                        `mt-4 w-full py-5 rounded-2xl font-semibold transition flex items-center justify-center gap-2
-                    ${
-                            darkMode
-                                ? "bg-white text-black hover:bg-zinc-300"
-                                : "bg-black text-white hover:bg-zinc-800"
-                        }`
-                    }
+                className={
+                    `mt-4 w-full py-4 md:py-5 rounded-2xl font-semibold transition active:scale-[0.98] flex items-center justify-center gap-2
+    ${
+                        darkMode
+                            ? "bg-white text-black hover:bg-zinc-300"
+                            : "bg-black text-white hover:bg-zinc-800"
+                    }`
+                }
             >
                 {
                     loading
