@@ -1,14 +1,10 @@
-type Props = {
-    t: {
-        title: string
-        subtitle: string
-    }
-}
+type Props = { t: { title: string, subtitle: string }, darkMode: boolean }
 
-function Header({ t }: Props) {
+function Header({t}: Props)
+{
     return (
-        <div className="p-6 border-b border-zinc-800">
-            <h1 className="text-5xl font-bold mb-2">
+        <div className="p-4 md:p-6">
+            <h1 className="text-4xl md:text-5xl font-bold mb-2">
                 {t.title}
             </h1>
 

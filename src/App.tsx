@@ -6,6 +6,7 @@ import Header from "./components/Header"
 import SearchBar from "./components/SearchBar"
 import RecipeCard from "./components/RecipeCard"
 import RecipeDetails from "./components/RecipeDetails"
+import ThemeToggle from "./components/ThemeToggle"
 import LanguageSwitcher from "./components/LanguageSwitcher"
 
 import type { Recipe } from "./types/recipe"
@@ -29,6 +30,7 @@ function App() {
     const t = translations[language]
     const aiLanguage = aiLanguages[language]
 
+    {/* AI Recipe Generation Handler */}
     const handleSearch =
         useCallback(async () => {
             if (!dish.trim() || loading) return
@@ -126,17 +128,15 @@ function App() {
             }
         }, [dish, loading, aiLanguage])
 
+    {/* Theme Computation */}
     const appTheme =
         useMemo(() =>
-                darkMode
-                    ? "bg-black text-white"
-                    : "bg-zinc-100 text-black"
+                darkMode ? "bg-black text-white"
+                         : "bg-zinc-100 text-black"
             , [darkMode])
 
-    return (
-        <div
-            className={`min-h-screen flex overflow-hidden transition-colors duration-300 ${appTheme}`}
-        >
+    return (<div className={`min-h-screen flex overflow-hidden transition-colors duration-300 ${appTheme}`}>
+
             {/* Desktop Sidebar */}
             <div className="hidden md:block">
                 <Sidebar
@@ -149,57 +149,96 @@ function App() {
             {/* Mobile Sidebar Drawer */}
             {sidebarOpen && (
                 <div className="fixed inset-0 z-50 md:hidden">
-                    <div
-                        className="absolute inset-0 bg-black/60"
+                    <div className={`absolute inset-0
+                                    ${darkMode ? "bg-black/60"
+                                               : "bg-black/30"}
+                                   `}
+
                         onClick={() => setSidebarOpen(false)}
                     />
 
-                    <div className="absolute left-0 top-0 h-full w-72 bg-zinc-900 p-4">
-                        <Sidebar
-                            darkMode={darkMode}
-                            setDarkMode={setDarkMode}
-                            t={t}
-                        />
+                    <div className={`absolute right-0 top-0 h-full w-72 p-5 flex flex-col transition-colors duration-300
+                                    ${darkMode  ? "bg-zinc-900 text-white" 
+                                                : "bg-white text-black"}
+                                   `}>
 
-                        <div className="mt-4">
-                            <LanguageSwitcher
-                                language={language}
-                                setLanguage={setLanguage}
-                            />
+
+                        {/* Mobile Sidebar Header */}
+                        <div className="flex items-center justify-between">
+
+                            <h2 className="text-2xl font-bold">
+                                {t.sideBarHead}
+                            </h2>
+
+                            <ThemeToggle darkMode={darkMode} setDarkMode={setDarkMode}/>
                         </div>
 
-                        <button
-                            className="mt-4 text-white"
-                            onClick={() => setSidebarOpen(false)}
-                        >
-                            Close
-                        </button>
+                        {/* Mobile Language Switcher */}
+
+                        <div className="mt-6">
+                            <LanguageSwitcher language={language} setLanguage={setLanguage}/>
+                        </div>
+
                     </div>
+
                 </div>
             )}
 
             <main className="flex-1 flex flex-col">
-                <div className="flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
-                    <div className="flex items-center justify-between">
-                        <Header t={t} />
 
-                        <button
-                            className="md:hidden p-3"
-                            onClick={() => setSidebarOpen(true)}
-                        >
-                            ☰
-                        </button>
+                {/* App Header Section */}
+
+                <div className={`w-full p-4 md:border-none md:p-0
+                                   ${darkMode ? "border-zinc-800"
+                                              : "border-zinc-300"}
+                               `}>
+
+                    {/* Header Row */}
+
+                    <div className="w-full">
+                        <div className="flex items-center justify-between">
+                            <Header t={t} darkMode={darkMode} />
+
+                            <div className="flex items-center gap-3 pr-2 md:pr-6">
+
+
+                                {/* Desktop Language Switcher */}
+
+                                <div className="hidden md:block">
+                                    <LanguageSwitcher language={language} setLanguage={setLanguage}/>
+                                </div>
+
+                                {/* Mobile Menu Button */}
+
+                                <button
+                                    className="md:hidden p-3"
+                                    onClick={() => setSidebarOpen(true)}>
+
+                                    ☰
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        {/* Divider */}
+
+                        <div className={`mt-3 h-0.5 w-full
+                                         ${darkMode ? "bg-zinc-800" :
+                                                    "bg-zinc-300"}
+                                      `}/>
+
                     </div>
 
-                    <div className="p-4 md:p-6 hidden md:block">
-                        <LanguageSwitcher
-                            language={language}
-                            setLanguage={setLanguage}
-                        />
-                    </div>
                 </div>
 
+                {/* Main Content */}
+
                 <div className="flex-1 overflow-auto p-4 md:p-6">
+
+
+                    {/* Search Section */}
                     <SearchBar
                         dish={dish}
                         setDish={setDish}
@@ -209,8 +248,15 @@ function App() {
                         t={t}
                     />
 
+                    {/* Recipes Grid */}
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+
+                        {/* Recipes List */}
+
                         <div className="space-y-4">
+
                             <AnimatePresence>
                                 {recipes.map((recipe, i) => (
                                     <RecipeCard
@@ -226,18 +272,27 @@ function App() {
                                         }
                                         t={t}
                                     />
+
                                 ))}
+
                             </AnimatePresence>
+
                         </div>
+
+                        {/* Recipe Details Panel */}
 
                         <RecipeDetails
                             selectedRecipe={selectedRecipe}
                             darkMode={darkMode}
                             t={t}
                         />
+
                     </div>
+
                 </div>
+
             </main>
+
         </div>
     )
 }
