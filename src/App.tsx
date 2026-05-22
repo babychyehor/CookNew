@@ -135,7 +135,7 @@ function App() {
                          : "bg-zinc-100 text-black"
             , [darkMode])
 
-    return (<div className={`min-h-screen flex overflow-hidden transition-colors duration-300 ${appTheme}`}>
+    return (<div className={`min-h-screen flex transition-colors duration-300 ${appTheme}`}>
 
             {/* Desktop Sidebar */}
             <div className="hidden md:block">
@@ -175,9 +175,15 @@ function App() {
 
                         {/* Mobile Language Switcher */}
 
-                        <div className="mt-6">
-                            <LanguageSwitcher language={language} setLanguage={setLanguage}/>
+                        <div className="mt-6 flex justify-end">
+                            <LanguageSwitcher
+                                language={language}
+                                setLanguage={setLanguage}
+                            />
                         </div>
+
+                        {/* MOBILE DIVIDER */}
+                        <div className="block md:hidden mt-4 h-px w-full bg-zinc-700/40" />
 
                     </div>
 

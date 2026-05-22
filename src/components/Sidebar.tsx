@@ -10,37 +10,30 @@ type Props = {
     t: Translation
 }
 
-function Sidebar({
-                     darkMode,
-                     setDarkMode,
-                     t,
-                 }: Props)
-{
-    return (
-        <aside
-            className={`
-        w-60 h-screen shrink-0 border-r p-5 flex flex-col
-        ${
-                darkMode
-                    ? "border-zinc-800 bg-zinc-950"
-                    : "border-zinc-300 bg-white"
-            }
-    `}
-        >
+function Sidebar({darkMode, setDarkMode, t,}: Props)
+
+{return (<aside className={`w-60 sticky top-0 h-screen shrink-0 border-r p-5 flex flex-col
+                      ${darkMode ? "border-zinc-800 bg-zinc-950"
+                                    : "border-zinc-300 bg-white"}
+                      `}>
+
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
+
                     <ChefHat />
 
                     <h2 className="text-2xl font-bold">
                         {t.sideBarHead}
                     </h2>
+
                 </div>
 
-                <ThemeToggle
-                    darkMode={darkMode}
-                    setDarkMode={setDarkMode}
-                />
+                <ThemeToggle darkMode={darkMode} setDarkMode={setDarkMode}/>
+
             </div>
+
+            {/* DESKTOP DIVIDER */}
+            <div className="hidden md:block mt-4 h-px w-full bg-zinc-700/40" />
         </aside>
     )
 }
