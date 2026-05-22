@@ -161,6 +161,13 @@ function App() {
                             t={t}
                         />
 
+                        <div className="mt-4">
+                            <LanguageSwitcher
+                                language={language}
+                                setLanguage={setLanguage}
+                            />
+                        </div>
+
                         <button
                             className="mt-4 text-white"
                             onClick={() => setSidebarOpen(false)}
