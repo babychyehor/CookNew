@@ -114,14 +114,12 @@ function RecipeDetails({
 
                             </button>
 
-                            {canShare && (
-                                <button onClick={() => {navigator.share({title: "Shopping list", text: shoppingListText})}}
+                            {canShare && (<button onClick={() => {navigator.share({title: "Shopping list", text: shoppingListText})}}
                                         className="px-4 py-2 rounded-xl bg-zinc-700 text-white text-sm font-medium transition duration-150 hover:brightness-95 active:brightness-75 active:scale-95">
 
-                                    {t.exportToNotes}
+                                            {t.exportToNotes}
 
-                                </button>
-                            )}
+                                         </button>)}
 
                         </div>
 
