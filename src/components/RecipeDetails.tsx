@@ -115,7 +115,8 @@ function RecipeDetails({
 
                             </button>
 
-                            <button onClick={() => {navigator.share?.({title: "Shopping list", text: shoppingListText,})}} className="px-4 py-2 rounded-xl bg-zinc-700 text-white text-sm font-medium">
+                            <button onClick={() => {navigator.share?.({title: "Shopping list", text: shoppingListText,})}}
+                                    className="px-4 py-2 rounded-xl bg-zinc-700 text-white text-sm font-medium transition duration-150 hover:brightness-95 active:brightness-75 active:scale-95">
 
                                 {t.exportToNotes}
 
@@ -179,8 +180,8 @@ function RecipeDetails({
                         </div>
 
                         <div className={`p-3 md:p-4 rounded-xl break-words 
-                        ${darkMode ? "bg-black" 
-                                   : "bg-zinc-100"}`}>
+                            ${darkMode ? "bg-black" 
+                                       : "bg-zinc-100"}`}>
 
                             <p className="text-sm text-zinc-500">
                                 {t.carbs}
