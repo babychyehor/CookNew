@@ -17,6 +17,12 @@ export type Translation = {
     carbs: string
     fiber: string
     salt: string
+    favorites: string
+
+    ingredientHint: string
+    shoppingList: string
+    copy: string
+    exportToNotes: string
 }
 
 export const translations: Record<string, Translation> = {
@@ -36,7 +42,7 @@ export const translations: Record<string, Translation> = {
 
         ingredients: "Ingredients",
 
-        instructions: "Сooking",
+        instructions: "Cooking",
 
         step: "Step",
 
@@ -55,6 +61,19 @@ export const translations: Record<string, Translation> = {
         fiber: "Fiber",
 
         salt: "Salt",
+
+        favorites: "Favorites",
+
+        ingredientHint:
+            "✓ Mark ingredients you already have",
+
+        shoppingList:
+            "Shopping list",
+
+        copy: "Copy",
+
+        exportToNotes:
+            "Export to Notes",
     },
 
     ua: {
@@ -93,6 +112,19 @@ export const translations: Record<string, Translation> = {
         fiber: "Клітковина",
 
         salt: "Сіль",
+
+        favorites: "Улюблене",
+
+        ingredientHint:
+            "✓ Познач інгредієнти, які вже є вдома",
+
+        shoppingList:
+            "Список покупок",
+
+        copy: "Скопіювати",
+
+        exportToNotes:
+            "Експортувати в нотатки",
     },
 
     cz: {
@@ -120,7 +152,8 @@ export const translations: Record<string, Translation> = {
 
         nutrition: "Nutriční hodnoty",
 
-        calories: "Celkový počet kalorií",
+        calories:
+            "Celkový počet kalorií",
 
         protein: "Bílkoviny",
 
@@ -131,10 +164,26 @@ export const translations: Record<string, Translation> = {
         fiber: "Vláknina",
 
         salt: "Sůl",
+
+        favorites: "Oblíbené",
+
+        ingredientHint:
+            "✓ Označ ingredience, které už máš doma",
+
+        shoppingList:
+            "Nákupní seznam",
+
+        copy: "Kopírovat",
+
+        exportToNotes:
+            "Exportovat do Poznámek",
     },
 }
 
-export const aiLanguages: Record<Language, string> = {
+export const aiLanguages: Record<
+    Language,
+    string
+> = {
     en: "English",
     ua: "Ukrainian",
     cz: "Czech",
