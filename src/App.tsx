@@ -59,53 +59,37 @@ function App() {
                     {
                         role: "user",
                         content: `
-                                    Generate 3 recipes for "${dish}" with full nutritional profile.
+                                    Generate 3 recipes for "${dish}"
+
+                                    Language: ${aiLanguage}
+                                    Diet mode: ${dietMode}
                                     
-                                    IMPORTANT:
-                                    - Write everything in ${aiLanguage}
-                                    - Recipe titles must be in ${aiLanguage}
-                                    - Ingredients must be in ${aiLanguage}
-                                    - Steps must be in ${aiLanguage}
-                                    - Diet mode: ${dietMode}
-                                    - If vegan:exclude all animal products
-                                    - If gluten-free:  exclude gluten
-                                    - If lactose-free: exclude milk products
+                                    Rules:
+                                    - Vegan: no animal products
+                                    - Gluten-free: no gluten
+                                    - Lactose-free: no dairy
                                     
-                                    - Include allergens array
+                                    Return ONLY valid JSON.
+                                    No markdown.
+                                    No extra text.
                                     
-                                    - All values MUST be numbers only
-                                    - Calories are total kcal for whole dish
-                                    - Protein, fat, carbs, fiber, salt in grams
-                                    - Weight MUST be total dish weight in grams
-                                    - Include allergens array
-                                    - Allergens must contain common allergens present in recipe
+                                    Each recipe must contain:
                                     
-                                    CRITICAL RULES:
-                                    - Return ONLY valid JSON
-                                    - No markdown
-                                    - No backticks
-                                    - No extra text
-                                    - Always return EXACTLY 3 recipes
-                                    - NEVER omit fields
-                                    
-                                    OUTPUT:
-                                    [
-                                      {
-                                        "title": "Recipe name",
-                                        "ingredients": ["ingredient"],
-                                        "allergens": ["Milk","Eggs","Gluten"],
-                                        "steps": ["step"],
-                                        "weight": 500,
-                                        "nutrition": {
-                                            "calories": 600,
-                                            "protein": 30,
-                                            "fat": 20,
-                                            "carbs": 70,
-                                            "fiber": 5,
-                                            "salt": 2
-                                        }
+                                    {
+                                      "title":"",
+                                      "ingredients":[""],
+                                      "allergens":[""],
+                                      "steps":[""],
+                                      "weight":0,
+                                      "nutrition":{
+                                        "calories":0,
+                                        "protein":0,
+                                        "fat":0,
+                                        "carbs":0,
+                                        "fiber":0,
+                                        "salt":0
                                       }
-                                    ]
+                                    }
                         `
                     }
                 ]
