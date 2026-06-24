@@ -279,7 +279,7 @@ ${
 
                             </div>
 
-                            <div className={`p-3 md:p-4 rounded-xl break-words${darkMode ? "bg-black" : "bg-zinc-100"}`}>
+                            <div className={`p-3 md:p-4 rounded-xl break-words ${darkMode ? "bg-black" : "bg-zinc-100"}`}>
 
                                 <p className="text-sm text-zinc-500">
                                     {t.carbs}
