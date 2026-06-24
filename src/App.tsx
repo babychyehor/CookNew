@@ -52,9 +52,9 @@ function App() {
         if (!dish.trim() || loading) return
 
         setLoading(true)
-
+        console.time("recipe")
         try {const res = await mistralClient.chat.complete({
-                model: "mistral-large-latest",
+            model: "mistral-small-latest",
                 messages: [
                     {
                         role: "user",
@@ -110,6 +110,7 @@ function App() {
                     }
                 ]
             })
+            console.timeEnd("recipe")
 
             const text = res.choices?.[0]?.message?.content
 
