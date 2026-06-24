@@ -59,37 +59,39 @@ function App() {
                     {
                         role: "user",
                         content: `
-                                    Generate 3 recipes for "${dish}"
-
-                                    Language: ${aiLanguage}
-                                    Diet mode: ${dietMode}
+                                    Generate 3 recipes for "${dish}" with full nutritional profile.
                                     
-                                    Rules:
-                                    - Vegan: no animal products
-                                    - Gluten-free: no gluten
-                                    - Lactose-free: no dairy
+                                    IMPORTANT:
+                                    - Write everything in ${aiLanguage}
+                                    - Recipe titles must be in ${aiLanguage}
+                                    - Ingredients must be in ${aiLanguage}
+                                    - Steps must be in ${aiLanguage}
+                                    - Diet mode: ${dietMode}
+                                    - If vegan:exclude all animal products
+                                    - If gluten-free:  exclude gluten
+                                    - If lactose-free: exclude milk products
                                     
-                                    Return ONLY valid JSON.
-                                    No markdown.
-                                    No extra text.
-                                    
-                                    Each recipe must contain:
-                                    
-                                    {
-                                      "title":"",
-                                      "ingredients":[""],
-                                      "allergens":[""],
-                                      "steps":[""],
-                                      "weight":0,
-                                      "nutrition":{
-                                        "calories":0,
-                                        "protein":0,
-                                        "fat":0,
-                                        "carbs":0,
-                                        "fiber":0,
-                                        "salt":0
-                                      }
-                                    }
+                                        Return ONLY valid JSON.
+                                        No markdown.
+                                        No extra text.
+                                        
+                                        Each recipe must contain:
+                                        
+                                        {
+                                          "title":"",
+                                          "ingredients":[""],
+                                          "allergens":[""],
+                                          "steps":[""],
+                                          "weight":0,
+                                          "nutrition":{
+                                            "calories":0,
+                                            "protein":0,
+                                            "fat":0,
+                                            "carbs":0,
+                                            "fiber":0,
+                                            "salt":0
+                                          }
+                                        }
                         `
                     }
                 ]
