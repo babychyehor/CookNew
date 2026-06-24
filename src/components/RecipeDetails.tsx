@@ -1,20 +1,85 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react"
+import { mistralClient } from "../lib/mistral"
 
 import type { Recipe } from "../types/recipe"
 import { translations } from "../i18n/translations"
+import React from "react"
 
 type Props = {
     selectedRecipe: Recipe | null
+    setSelectedRecipe: React.Dispatch<React.SetStateAction<Recipe | null>>
     darkMode: boolean
     t: typeof translations.en
 }
 
-function RecipeDetails({selectedRecipe, darkMode, t,}: Props)
+function RecipeDetails({selectedRecipe, setSelectedRecipe, darkMode, t,}: Props)
     {
         const [checkedIngredients, setCheckedIngredients] = useState<string[]>([])
+        const [replacingIngredient, setReplacingIngredient] = useState<string | null>(null)
+
 
         if (!selectedRecipe) {return null}
+        const handleReplaceIngredient = async (
+            ingredient: string
+        ) => {
+            if (!selectedRecipe) return
+
+            setReplacingIngredient(ingredient)
+
+            try {
+                const res = await mistralClient.chat.complete({
+                    model: "mistral-large-latest",
+                    messages: [
+                        {
+                            role: "user",
+                            content: `
+                                    Replace ingredient "${ingredient}" in this recipe.
+                                    
+                                    Recipe:
+                                    ${JSON.stringify(selectedRecipe)}
+                                    
+                                    Rules:
+                                    - Keep recipe as similar as possible
+                                    - Replace only this ingredient
+                                    - Update ingredients
+                                    - Update steps if needed
+                                    - Update allergens
+                                    - Update nutrition
+                                    - Return ONLY valid JSON
+`
+                        }
+                    ]
+                })
+
+                const text =
+                    res.choices?.[0]?.message?.content
+
+                if (!text || typeof text !== "string")
+                    return
+
+                const cleaned = text
+                    .replace(/```json/g, "")
+                    .replace(/```/g, "")
+                    .trim()
+
+                try {const updatedRecipe = JSON.parse(cleaned)
+
+                    if (updatedRecipe?.title) {
+                        setSelectedRecipe(updatedRecipe)
+                    }
+                } catch (e) {
+                    console.error("Invalid JSON:", e)
+                }
+
+            } catch (e) {
+                console.error(e)
+
+                alert("Mistral API limit exceeded. Try again later.")
+            } finally {
+                setReplacingIngredient(null)
+            }
+        }
 
         const safeWeight = selectedRecipe.weight || 300
 
@@ -64,11 +129,34 @@ function RecipeDetails({selectedRecipe, darkMode, t,}: Props)
                                                 <li key={i} className="flex items-center gap-3">
                                                     <input type="checkbox" checked={checked} onChange={() => {setCheckedIngredients(prev => checked ? prev.filter(x => x !== item) : [...prev, item,])}}/>
 
-                                                    <span className={` break-words ${checked ? "line-through opacity-50" : ""}`}>
+                                                    <div className="flex items-center gap-2 flex-1">
+                                                                <span
+                                                                    className={`flex-1 break-words ${
+                                                                        checked
+                                                                            ? "line-through opacity-50"
+                                                                            : ""
+                                                                    }`}
+                                                                >
+                                                                    {item}
+                                                                </span>
 
-                                                        {item}
-
-                                                    </span>
+                                                        <button
+                                                            onClick={() =>
+                                                                handleReplaceIngredient(item)
+                                                            }
+                                                            disabled={!!replacingIngredient}
+                                                            className={`px-2 py-1 rounded-lg text-xs text-black
+${
+                                                                replacingIngredient
+                                                                    ? "bg-yellow-300 cursor-not-allowed"
+                                                                    : "bg-yellow-500"
+                                                            }`}
+                                                        >
+                                                            {replacingIngredient === item
+                                                                ? "..."
+                                                                : "↻"}
+                                                        </button>
+                                                    </div>
 
                                                 </li>
                                             )

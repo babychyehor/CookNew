@@ -132,7 +132,9 @@ function App() {
             setDish("")
             setSidebarOpen(false)
 
-        } catch (e) {console.error("Recipe generation failed:", e)} finally {setLoading(false)}
+        } catch (e) {console.error("Recipe generation failed:", e)
+            alert("Mistral API limit exceeded. Try again later.")
+        } finally {setLoading(false)}
     }, [dish, loading, aiLanguage, dietMode])
 
     const appTheme = useMemo(() => (darkMode ? "bg-black text-white" : "bg-zinc-100 text-black"), [darkMode])
@@ -313,6 +315,7 @@ function App() {
 
                         <RecipeDetails
                             selectedRecipe={selectedRecipe}
+                            setSelectedRecipe={setSelectedRecipe}
                             darkMode={darkMode}
                             t={t}
                         />
