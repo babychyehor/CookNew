@@ -22,6 +22,12 @@ function App() {
     const [language, setLanguage] = useState<Language>("en")
     const [dish, setDish] = useState("")
     const [loading, setLoading] = useState(false)
+    const [dietMode, setDietMode] = useState<
+        "normal" |
+        "vegan" |
+        "gluten-free" |
+        "lactose-free"
+    >("normal")
 
     const [recipes, setRecipes] = useState<Recipe[]>([])
     const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null)
@@ -32,12 +38,14 @@ function App() {
 
     const t = translations[language]
     const favoriteRecipes = getFavorites()
+
     useEffect(() => {const update = () => setFavoritesVersion(v => v + 1)
         window.addEventListener("favorites-updated", update)
 
         return () => window.removeEventListener("favorites-updated", update)
 
     }, [])
+
     const aiLanguage = aiLanguages[language]
 
     const handleSearch = useCallback(async () => {
@@ -58,11 +66,19 @@ function App() {
                                     - Recipe titles must be in ${aiLanguage}
                                     - Ingredients must be in ${aiLanguage}
                                     - Steps must be in ${aiLanguage}
+                                    - Diet mode: ${dietMode}
+                                    - If vegan:exclude all animal products
+                                    - If gluten-free:  exclude gluten
+                                    - If lactose-free: exclude milk products
+                                    
+                                    - Include allergens array
                                     
                                     - All values MUST be numbers only
                                     - Calories are total kcal for whole dish
                                     - Protein, fat, carbs, fiber, salt in grams
                                     - Weight MUST be total dish weight in grams
+                                    - Include allergens array
+                                    - Allergens must contain common allergens present in recipe
                                     
                                     CRITICAL RULES:
                                     - Return ONLY valid JSON
@@ -77,6 +93,7 @@ function App() {
                                       {
                                         "title": "Recipe name",
                                         "ingredients": ["ingredient"],
+                                        "allergens": ["Milk","Eggs","Gluten"],
                                         "steps": ["step"],
                                         "weight": 500,
                                         "nutrition": {
@@ -116,7 +133,7 @@ function App() {
             setSidebarOpen(false)
 
         } catch (e) {console.error("Recipe generation failed:", e)} finally {setLoading(false)}
-    }, [dish, loading, aiLanguage])
+    }, [dish, loading, aiLanguage, dietMode])
 
     const appTheme = useMemo(() => (darkMode ? "bg-black text-white" : "bg-zinc-100 text-black"), [darkMode])
 
@@ -220,6 +237,42 @@ function App() {
                         <div className={`mt-3 h-0.5 w-full ${darkMode ? "bg-zinc-800" 
                                                                       : "bg-zinc-300"}`} />
                         </div>
+                </div>
+
+                <div className="mb-4 ml-6">
+                    <select
+                        value={dietMode}
+                        onChange={(e) =>
+                            setDietMode(
+                                e.target.value as
+                                    | "normal"
+                                    | "vegan"
+                                    | "gluten-free"
+                                    | "lactose-free"
+                            )
+                        }
+                        className={`px-4 py-2 rounded-xl border ${
+                            darkMode
+                                ? "bg-zinc-900 border-zinc-700"
+                                : "bg-white border-zinc-300"
+                        }`}
+                    >
+                        <option value="normal">
+                            {t.dietNormal}
+                        </option>
+
+                        <option value="vegan">
+                            {t.dietVegan}
+                        </option>
+
+                        <option value="gluten-free">
+                            {t.dietGlutenFree}
+                        </option>
+
+                        <option value="lactose-free">
+                            {t.dietLactoseFree}
+                        </option>
+                    </select>
                 </div>
 
                 <div className="flex-1 overflow-auto p-4 md:p-6">

@@ -23,6 +23,13 @@ export type Translation = {
     shoppingList: string
     copy: string
     exportToNotes: string
+    allergens: string
+    replaceIngredient: string
+    dietNormal: string
+    dietVegan: string
+    dietGlutenFree: string
+    dietLactoseFree: string
+
 }
 
 export const translations: Record<string, Translation> = {
@@ -72,8 +79,19 @@ export const translations: Record<string, Translation> = {
 
         copy: "Copy",
 
-        exportToNotes:
-            "Export to Notes",
+        exportToNotes: "Export to Notes",
+
+        allergens: "Allergens",
+
+        replaceIngredient: "Replace ingredient",
+
+        dietNormal: "Normal",
+
+        dietVegan: "Vegan",
+
+        dietGlutenFree: "Gluten Free",
+
+        dietLactoseFree: "Lactose Free",
     },
 
     ua: {
@@ -123,8 +141,19 @@ export const translations: Record<string, Translation> = {
 
         copy: "Скопіювати",
 
-        exportToNotes:
-            "Експортувати в нотатки",
+        exportToNotes: "Експортувати в нотатки",
+
+        allergens: "Алергени",
+
+        replaceIngredient: "Замінити інгредієнт",
+
+        dietNormal: "Звичайна",
+
+        dietVegan: "Веганська",
+
+        dietGlutenFree: "Без глютену",
+
+        dietLactoseFree: "Без лактози",
     },
 
     cz: {
@@ -175,8 +204,19 @@ export const translations: Record<string, Translation> = {
 
         copy: "Kopírovat",
 
-        exportToNotes:
-            "Exportovat do Poznámek",
+        exportToNotes: "Exportovat do Poznámek",
+
+        allergens: "Alergeny",
+
+        replaceIngredient: "Nahradit ingredienci",
+
+        dietNormal: "Normální",
+
+        dietVegan: "Veganská",
+
+        dietGlutenFree: "Bez lepku",
+
+        dietLactoseFree: "Bez laktózy",
     },
 }
 

@@ -54,8 +54,7 @@ function RecipeCard({
                             exit={{ opacity: 0 }}
                             transition={{ delay: index * 0.1 }}
                             onClick={onClick}
-                            className=
-                                {`p-4 md:p-5 rounded-3xl cursor-pointer border transition active:scale-[0.98] overflow-hidden
+                            className={`p-4 md:p-5 rounded-3xl cursor-pointer border transition active:scale-[0.98] overflow-hidden
                             
                             ${isFav ? "border-yellow-400 shadow-[0_0_10px_rgba(250,204,21,0.6)]" : selected ? darkMode ? "border-white" : "border-zinc-500" : "border-transparent"}
                             
